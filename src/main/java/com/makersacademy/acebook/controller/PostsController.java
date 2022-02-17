@@ -33,7 +33,7 @@ public class PostsController {
     CommentRepository commentRepository;
     @Autowired
     UserRepository userRepository;
-    private Optional<Post> findById;
+    
 
 
     @GetMapping("/posts")
