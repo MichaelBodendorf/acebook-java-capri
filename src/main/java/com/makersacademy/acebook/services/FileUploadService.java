@@ -39,5 +39,24 @@ public class FileUploadService {
         .map( path -> "/uploads-dir/pictures/" + path.toString() )
         .collect(Collectors.toList());
   }
+
+	public String storeAvatar(MultipartFile file, String userName) {
+			Path avatarLocation = Paths.get("src/main/resources/static/uploads-dir/avatar");
+			Path destinationFile = null;
+			try {
+				destinationFile = avatarLocation.resolve(
+						Paths.get( userName + "_" + file.getOriginalFilename()))
+						.normalize().toAbsolutePath();
+				try (InputStream inputStream = file.getInputStream()) {
+					Files.copy(inputStream, destinationFile,
+						StandardCopyOption.REPLACE_EXISTING);
+				}
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}   
+
+			return "/uploads-dir/avatar/" + destinationFile.getFileName();
+	}
   
 }

@@ -11,6 +11,8 @@
     <title>Acebook</title>
   </head>
   <body>
+    
+    <div class="container">
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
@@ -43,9 +45,19 @@
       </div>
     </nav>
 
+    <!-- Picture Gallery -->
+    <div class="container mt-3">
+      <p> Your current avatar:</p>
+      <div class="row row-cols-1 row-cols-sm-3 g-4">
+        <div class="col">
+            <img th:src="${picturePath}" height="160" class="card" alt="...">
+        </div>
+      </div>
+    </div>
+
     <!-- Post a new Pictures -->
     <div class="ms-3">
-      <form method="POST" action="/pictures" enctype="multipart/form-data">
+      <form th:method="PUT" action="/users" enctype="multipart/form-data">
         <div class="row g-2 align-items-center mb-2 mt-2">
           <div class="col-auto">
             <input class="form-control form-control-sm" type="file" name="file" id="file">
@@ -55,13 +67,6 @@
           </div>
         </div>
       </form>
-    </div>
-
-    <!-- Picture Gallery -->
-    <div class="row row-cols-1 row-cols-sm-3 g-4">
-      <div class="col">
-          <img th:src="${picturePath}" height="160" class="card-body" alt="...">
-      </div>
     </div>
   
     <!-- Option 1: Bootstrap Bundle with Popper -->
