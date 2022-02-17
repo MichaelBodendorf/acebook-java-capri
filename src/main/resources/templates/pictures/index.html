@@ -47,7 +47,7 @@
     <!-- Post a new Pictures -->
     <div class="container">
       <form method="POST" action="/pictures" enctype="multipart/form-data">
-        <div class="row g-2 align-items-center mb-2 mt-2">
+        <div class="row g-2 align-items-center mb-3 mt-2">
           <div class="col-auto">
             <input class="form-control form-control-sm" type="file" name="file" id="file">
           </div>
@@ -62,7 +62,7 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-3 g-4">
         <div class="col">
-          <div th:each="path : ${picturePaths}" class="card">
+          <div th:each="path : ${picturePaths}" class="card mb-3">
             <img th:src="${path}" class="card-body" alt="...">
           </div>
         </div>
