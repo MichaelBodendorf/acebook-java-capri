@@ -6,8 +6,6 @@ import com.makersacademy.acebook.repository.CommentRepository;
 import com.makersacademy.acebook.repository.PostRepository;
 import com.makersacademy.acebook.repository.UserRepository;
 
-// import org.omg.CORBA.Request;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,13 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-//import ch.qos.logback.core.joran.conditional.ElseAction;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-//import javax.persistence.Id;
 
 @Controller
 public class PostsController {
@@ -62,11 +56,10 @@ public class PostsController {
         return reversedList;
     }
 
-    @PutMapping("/posts/id")
-     public RedirectView update(@ModelAttribute Post post, Long id, String like ) {
+    @PutMapping("/posts/like")
+     public RedirectView update( Long id, String like ) {
         
-        post = repository.findById(id).get();
-                
+        Post post = repository.findById(id).get();
         post.counter(like);
 
         repository.save(post);
