@@ -16,11 +16,14 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    
     private String content;
     private String author;
     private Short likes;
-
-    public Post() {}
+    private Short dislikes;
+   
+    public Post() { this.likes = 0; this.dislikes = 0;}
 
     public Post(String content) {
         this.content = content;
@@ -37,6 +40,14 @@ public class Post {
         this.content = content;
         this.author = author;
     }
+    
+   
+    public void counter(String like){
+        
+      if (like.equals("likesup")) { ++ this.likes; } 
+      if (like.equals("dislikesup")) {++ this.dislikes; } 
+
+    }    
 
     // -----getter and setter provided by lombok.Data-----
      public String getContent() { return this.content; }
@@ -47,4 +58,7 @@ public class Post {
      public void setAuthor(String author) { this.author = author; }
      public void setLikes(Short likes) {this.likes = likes; }
      public Short getLikes() { return this.likes; }
+     public void setDislikes(Short dislikes) {this.dislikes = dislikes; }
+     public Short getDislikes() { return this.dislikes; }
+     
 }

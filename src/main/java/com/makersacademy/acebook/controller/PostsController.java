@@ -20,6 +20,7 @@ import ch.qos.logback.core.joran.conditional.ElseAction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Id;
 
@@ -32,6 +33,7 @@ public class PostsController {
     CommentRepository commentRepository;
     @Autowired
     UserRepository userRepository;
+    private Optional<Post> findById;
 
 
     @GetMapping("/posts")
@@ -48,8 +50,6 @@ public class PostsController {
     @PostMapping("/posts")
     public RedirectView create(@ModelAttribute Post post, Authentication auth) {
         post.setAuthor(auth.getName());
-        Short likes = 0;
-        post.setLikes(likes);
         repository.save(post);
         return new RedirectView("/posts");
     }
@@ -63,14 +63,14 @@ public class PostsController {
         return reversedList;
     }
 
-    @PostMapping("/posts/like")
-    public RedirectView update(@ModelAttribute Post post, Long id, Short likes, String content, String author, String like ) {
+    @PutMapping("/posts/{id}")
+     public RedirectView update(@ModelAttribute Post post, Long id, String like ) {
         
-        Short newlikes = (like.equals("up")) ?  (++ likes) : (-- likes) ;
+        post = repository.findById(id).get();
+                
+        post.counter(like);
 
-        Post updatePost = new Post( id, newlikes, content, author );
-              
-        repository.save(updatePost);
+        repository.save(post);
         return new RedirectView("/posts");
         
     }
