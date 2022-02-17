@@ -38,7 +38,7 @@ public class UsersController {
     @GetMapping("/users/profile")
     public String profile(Model model, Authentication auth) {
         User user = userRepository.findByUsername(auth.getName()).get(0);
-        model.addAttribute("picturePath", user.getAvatarPath());
+        model.addAttribute("picturePath", user.getAvatarpath());
         return "users/profile";
     }
 }

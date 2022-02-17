@@ -48,7 +48,7 @@
     <!-- Create a new Post -->
     <div class="container">
       <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
-        <div class="row g-2 mb-2 mt-2">
+        <div class="row g-2 mb-3 mt-2">
           <div class="col-auto">
             <input type="text" th:field="*{content}" id="content" placeholder="What's going on?" />
           </div>
@@ -62,8 +62,9 @@
 
     <!-- Show all Posts and Comments -->
     <div class="container">
-      <ul class="list-group" th:each="post : ${posts}">
+      <ul class="list-group mb-3" th:each="post : ${posts}">
         <li class="list-group-item list-group-item-warning">
+          <img height="32" th:each="u: ${username}" th:if="${u.username == post.author}" th:src="${u.avatarpath}" />
           <span class="fw-lighter">'<span th:text="${post.author}"></span>': </span>
           <span th:text="${post.content}"></span>
 
@@ -99,6 +100,7 @@
               <span th:each="usr : ${username}">
                 <span th:if="${post.id == cmt.postsid AND cmt.usersid == usr.id}">
                   <li class="list-group-item list-group-item-light">
+                    <img height="24" th:src="${usr.avatarpath}" />
                     <span class="fw-lighter">'<span th:text="${usr.username}"></span>': </span>
                     <span th:text="${cmt.message}"></span>
                   </li>    
