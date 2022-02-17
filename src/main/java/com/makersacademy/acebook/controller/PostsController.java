@@ -15,14 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
+//import ch.qos.logback.core.joran.conditional.ElseAction;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import javax.persistence.Id;
+//import javax.persistence.Id;
 
 @Controller
 public class PostsController {
@@ -63,7 +62,7 @@ public class PostsController {
         return reversedList;
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/posts/id")
      public RedirectView update(@ModelAttribute Post post, Long id, String like ) {
         
         post = repository.findById(id).get();
