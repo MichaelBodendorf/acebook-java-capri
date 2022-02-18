@@ -15,7 +15,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class PostsController {
@@ -32,7 +35,7 @@ public class PostsController {
     @GetMapping("/posts")
     public String index(Model model) {
         Iterable<Post> posts = repository.findAll();
-        model.addAttribute("posts", this.reversedPosts(posts));
+        model.addAttribute("posts", this.orderByIdDESC(posts));
         model.addAttribute("post", new Post());
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", this.commentRepository.findAll());
@@ -47,13 +50,13 @@ public class PostsController {
         return new RedirectView("/posts");
     }
 
-    private List<Post> reversedPosts(Iterable<Post> posts) {
-        List<Post> reversedList = new ArrayList<>();
-        for(Post p : posts) {
-            reversedList.add(p); 
-        }
-        Collections.reverse(reversedList);
-        return reversedList;
+    private List<Post> orderByIdDESC(Iterable<Post> posts) {
+        List<Post> listOfPosts = new ArrayList<>();
+        posts.forEach(listOfPosts::add);
+
+        return listOfPosts.stream()
+            .sorted(Comparator.comparingLong(Post::getId).reversed())
+            .collect(Collectors.toList());
     }
 
     @PutMapping("/posts/like")
