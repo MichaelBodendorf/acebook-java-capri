@@ -73,23 +73,17 @@
           <form style="display:inline-block" action="#" th:action="@{/posts/like}" th:object="${post}" th:method="put" >
             <input type="hidden" th:attr="name='id'" id="id" th:value="${post.id}" />
             <input type="hidden" th:attr="name='like'" id="like" value=likesup />
-
-            <button type="submit" class="btn btn-outline-success btn-sm" value="Like">Like
-              <span class="badge bg-success rounded-pill" th:text="${post.likes}"></span>
-            </button>
-
+            <input type="submit" value="Like" /> 
           </form>  
-                  
+             
+             &nbsp&nbsp <span th:text="${post.likes}">  </span> &nbsp  : &nbsp <span th:text="${post.dislikes}">  </span> &nbsp &nbsp 
+            
             <form style="display:inline-block" action="#" th:action="@{/posts/like}" th:object="${post}" th:method="put" >
               <input type="hidden" th:attr="name='id'" id="id" th:value="${post.id}" />
               <input type="hidden" th:attr="name='like'" id="like" value=dislikesup />   
-
-              <button type="submit" class="btn btn-outline-danger btn-sm" value="Dislike">Dislike
-                <span class="badge bg-danger rounded-pill" th:text="${post.dislikes}"></span>
-              </button>
-
+              <input type="submit" value="Dislike" />
             </form> 
-
+            <br><br>
             <!-- End Show likes on Posts -->  
 
         </li>
